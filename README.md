@@ -1,71 +1,72 @@
-# # 😃 Face Recognition using FaceNet and Triplet Loss
+Face Recognition using FaceNet and Triplet Loss  
+A comprehensive computer vision project that implements a face recognition and verification system using the FaceNet architecture with Triplet Loss. The project focuses on learning discriminative facial embeddings that enable accurate face verification and identification through distance-based comparison.
 
-This project implements a face recognition system using the **FaceNet** architecture with **Triplet Loss**, trained to identify and verify faces using deep feature embeddings.
+## Features
+- End-to-end face recognition and verification pipeline  
+- Deep feature embedding generation using FaceNet  
+- Triplet Loss for metric learning and identity separation  
+- Face verification against claimed identities  
+- Face recognition via nearest-neighbor matching  
+- Modular and educational implementation  
 
----
+## Model & Framework
+- Model: FaceNet (Inception-based architecture)  
+- Framework: TensorFlow with Keras backend  
+- Task: Face Verification and Face Identification  
+- Input Shape: 96 × 96 × 3 (RGB)  
+- Output: 128-dimensional face embedding vector  
 
-## 📌 Overview
+## Core Components
+- FaceNet model built using Inception v2 blocks  
+- Embedding generation for each input face image  
+- Triplet Loss function to enforce embedding separation  
+- Custom verification and recognition utilities  
 
-- **Framework**: Keras + TensorFlow backend
-- **Model**: FaceNet using Inception blocks
-- **Loss Function**: Triplet Loss
-- **Task**: Face Verification & Identification
-- **Input Shape**: (3, 96, 96)
+## Loss Function
+Triplet Loss minimizes the distance between anchor and positive embeddings while maximizing the distance from negative embeddings by a margin α:  
+max(||f(a) - f(p)||^2 - ||f(a) - f(n)||^2 + α, 0)
 
----
 
-## 🧠 Core Components
+## Training & Initialization
+- Triplet Loss implemented and validated using TensorFlow sessions  
+- Model compiled with Adam optimizer and custom loss  
+- Pretrained FaceNet weights loaded for faster convergence  
 
-### 🔷 Model Architecture
-- Inspired by the [FaceNet](https://arxiv.org/abs/1503.03832) paper
-- Inception blocks (v2) for feature extraction
-- Generates a 128-dimensional embedding vector per face
+## Face Database
+- Face images encoded into 128D embeddings  
+- Stored as a dictionary mapping identity names to embeddings  
+- Used for both verification and recognition tasks  
 
-### 🔶 Loss Function
-- **Triplet Loss**: Encourages the anchor-positive pair to be closer than the anchor-negative pair by a margin `\alpha`
+## Usage
+**Face Verification**  
+Confirms whether an image matches a claimed identity  
 
-```python
-loss = \sum{max(\|f(a) - f(p)\|^2 - \|f(a) - f(n)\|^2 + \alpha, 0)}
+**Face Recognition**  
+Identifies the closest matching identity from the database  
 
-🧪 Training & Initialization
+## Output
+- Successful identity match with confirmation message  
+- Rejection message for mismatched identities  
 
-Triplet loss implemented and tested using TensorFlow sessions
+## Dependencies
+- Python 3.x  
+- TensorFlow  
+- Keras  
+- NumPy  
+- OpenCV / PIL  
 
-Model compiled with Adam optimizer and custom loss
+## References
+- FaceNet: A Unified Embedding for Face Recognition and Clustering – Schroff et al.  
+- DeepFace: Closing the Gap to Human-Level Performance – Taigman et al.  
+- Keras-OpenFace Repository  
+- FaceNet GitHub Repository  
+- Keras Documentation  
+- TensorFlow Documentation  
 
-Pre-trained weights loaded using load_weights_from_FaceNet()
+## License
+This project is intended for educational and research purposes.  
+Free to use and modify with proper attribution.
 
-🧾 Usage
 
-✅ Face Verification
-
-Given an image and an identity, the system checks if the person is who they claim to be.
-
-verify("images/camera_0.jpg", "younes", database, FRmodel)
-
-🔍 Face Recognition
-
-Identifies the closest match in the database for a given image.
-
-who_is_it("images/camera_0.jpg", database, FRmodel)
-
-🗃️ Face Database
-
-Images are encoded into 128D vectors and stored in a dictionary with names as keys:
-
-database["andrew"] = img_to_encoding("images/andrew.jpg", FRmodel)
-
-📊 Output Sample
-
-Face matched correctly with message: It's younes, welcome in!
-
-Face not matched: It's not kian, please go away
-
-## 📚 References
-
-- Florian Schroff, Dmitry Kalenichenko, James Philbin – [FaceNet: A Unified Embedding for Face Recognition and Clustering (2015)](https://arxiv.org/abs/1503.03832)
-- Yaniv Taigman, Ming Yang, Marc'Aurelio Ranzato, Lior Wolf – [DeepFace: Closing the gap to human-level performance in face verification (2014)](https://www.cs.toronto.edu/~ranzato/publications/taigman_cvpr14.pdf)
-- Victor Sy Wang – [Keras-OpenFace GitHub Repository](https://github.com/iwantooxxoox/Keras-OpenFace)
-- David Sandberg – [FaceNet GitHub Repository](https://github.com/davidsandberg/facenet)
-- [Keras Documentation](https://keras.io/)
-- [TensorFlow Documentation](https://www.tensorflow.org/)
+## Loss Function
+Triplet Loss minimizes the distance between anchor and positive embeddings while maximizing the distance from negative embeddings by a margin α:  
